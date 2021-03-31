@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Index</title>
+</head>
+
+<body>
+
+  <label for="search-input">Search: </label>
+  <input type="text" id="search-input">
+  <button id ="search">Search</button>
+
+  <h1 style="color: blue">{{movie.name}}</h1>
+  <video controls  autoplay>
+
+      <source src={{movie.url}}
+              type="video/mp4" >
+
+      Sorry, your browser doesn't support embedded videos.
+  </video>
+
+  <script>
+    var searchInput = document.querySelector("#search-input")
+    var searchButton = document.querySelector("#search")
+
+    searchButton.addEventListener("click", () => {
+        searchQuery = searchInput.value
+
+          
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Index</title>
+</head>
+
+<body>
+
+  <label for="search-input">Search: </label>
+  <input type="text" id="search-input">
+  <button id ="search">Search</button>
+
+  {% for movie in movies %}
+      <p><a href="/get-movie?id={{movie.id}}">{{ movie.title }}</a></p>
+  {% endfor %}
+
+  <script>
+    var searchInput = document.querySelector("#search-input")
+    var searchButton = document.querySelector("#search")
+
+    searchButton.addEventListener("click", () => {
+        searchQuery = searchInput.value
+
+        window.open("/?q="+searchQuery,"_self")  
+    })
+  </script>
+
+</body>
+
+</html>

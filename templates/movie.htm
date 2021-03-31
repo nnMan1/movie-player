@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Index</title>
+
+  <style>
+      
+  </style>
+</head>
+
+<body>
+
+  <h1>{{movie.title_long}}</h1>
+  <img src={{movie.medium_cover_image}} alt="">
+  
+  <div>
+    {% for torrent in movie.torrents %}
+        <label for={{torrent.quality}}>{{torrent.quality}} </label>
+        <input type="radio" id={{torrent.quality}} name="quality" value = {{torrent.magnet}} checked>
+        <br>
+    {% endfor %}
+  </div>
+
+  <button id="play">Play</button>
+
+  <script>
+      playButton = document.querySelector("#play")
+      qualities = document.querySelectorAll("input[name='quality']")
+      
+      playButton.addEventListener("click", () => {
+        qualities.forEach(quality => {
+            if(quality.checked) {
+                window.open("/play?magnet="+quality.value,"_self")  
+                return
+            }
+        }) 
+    })
+
+      
+  </script>
+  
+</body>
+
+</html>
