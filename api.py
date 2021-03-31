@@ -5,7 +5,6 @@ import requests
 import json
 import time
 import sys
-import vlc
 
 class Movie(object):
     def __init__(self, *args):
