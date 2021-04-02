@@ -34,7 +34,7 @@
       playButton.addEventListener("click", () => {
         qualities.forEach(quality => {
             if(quality.checked) {
-                window.open("/play?magnet="+quality.value,"_self")  
+                window.open("/play?magnet="+quality.value+"&imdb_code={{movie.imdb_code}}","_self")  
                 return
             }
         }) 

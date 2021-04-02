@@ -1,15 +1,55 @@
 <html>
 <body>
 
+    <div>
+        <video id="video" controls preload="metadata" style="float:left;width:17em;">
+          <source src="{{data.url}}" type="video/mp4">
+        </video>
+        <textarea id="source" style="float:right;width:17em;height:200em;margin-left:5px;">
+{{data.caption}}
+      
+        </textarea>
+    </div>
 
 
-<video controls  autoplay>
+<script>
+    function srt2vtt(srt) {
+		var vtt = ''
+	 	srt = srt.replace(/\r+/g, '');
+	  	var list = srt.split('\n');
+	  	for (var i = 0; i < list.length; i++) {
+	  		var m = list[i].match(/(\d+):(\d+):(\d+)(?:,(\d+))?\s*--?>\s*(\d+):(\d+):(\d+)(?:,(\d+))?/)
+	  		if (m) {
+	  			vtt += m[1]+':'+m[2]+':'+m[3]+'.'+m[4]+' --> '+m[5]+':'+m[6]+':'+m[7]+'.'+m[8]+'\n';
+	  		} else {
+	  			vtt += list[i] + '\n'
+	  		}
+	    }
+	    vtt = "WEBVTT\n\n\n" + vtt
+	    vtt = vtt.replace(/^\s+|\s+$/g, '');
+	    return vtt
+	}
 
-    <source src={{url}}
-            type="video/mp4" >
-
-    Sorry, your browser doesn't support embedded videos.
-</video>
+    document.getElementById("video").addEventListener("loadedmetadata", function() {
+        track = document.createElement("track");
+        track.kind = "captions";
+        track.label = "English";
+        track.srclang = "en";
+        track.addEventListener("load", function() {
+          this.mode = "showing";
+          video.textTracks[0].mode = "showing"; // thanks Firefox 
+        });
+        // Here I just call trim() to get WEBVTT as 6 first characters
+        var vttText = document.getElementById("source").value.trim();
+        vttText = srt2vtt(vttText)
+        document.getElementById("source").value = vttText
+        var vttBlob = new Blob([vttText], {
+          type: 'text/plain'
+        });
+        track.src = URL.createObjectURL(vttBlob);
+        this.appendChild(track);
+      });
+</script>
 </body>
 
 </html>

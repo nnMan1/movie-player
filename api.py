@@ -5,6 +5,15 @@ import requests
 import json
 import time
 import sys
+import re
+
+class Subtitle:
+      def get__(imdb_code):
+            response = requests.post("https://yifysubtitles.org/movie-imdb/{}".format(imdb_code))
+            urls = re.findall("/subtitles/.*-serbian-yify-[0-9]*",response.text)
+            if(len(urls) == 0):
+                  return ""
+            return re.sub("/subtitles/", "https://yifysubtitles.org/subtitle/", urls[0])+".zip"
 
 class Movie(object):
     def __init__(self, *args):
@@ -149,8 +158,10 @@ def openUrl(url):
 
 if __name__ == "__main__":
 
-      movie =YTS.getById__(29766)
-      print(json.dumps(movie, indent=4, sort_keys=True))
+      print(Subtitle.get__("tt1790809"))
+
+      # movie =YTS.getById__(29766)
+      # print(json.dumps(movie, indent=4, sort_keys=True))
 #   seedr = Seedr();
   
 #   login_resp = seedr.login("dosljakvelibor@gmail.com", "natasa12@")
