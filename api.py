@@ -42,7 +42,7 @@ class YTS(object):
             pass
     
       def search__(q):
-            response = requests.post("https://yts.mx/api/v2/list_movies.json?query_term={}".format(q))
+            response = requests.post("https://yts.mx/api/v2/list_movies.json?sort_by=like_count&query_term={}".format(q))
             movies_json = json.loads(response.text)["data"]["movies"]
 
             movies = []
