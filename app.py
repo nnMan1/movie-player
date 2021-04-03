@@ -94,7 +94,7 @@ def subtitle():
 
         os.system("mv ./static/*.srt ./static/subtitle.srt")
 
-        with open("./static/subtitle.srt", "r" , errors =  "replace",  encoding = 'ascii') as subtitle:
+        with open("./static/subtitle.srt", "r" , errors =  "replace") as subtitle:
             content = subtitle.read()
             return content
         
