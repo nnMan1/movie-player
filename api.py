@@ -60,7 +60,7 @@ class YTS(object):
             for i in range(len(movie_json["torrents"])):
                   torrent = movie_json["torrents"][i]
                   title = movie_json["title"]
-                  movie_json["torrents"][i]["magnet"] = "magnet:?xt=urn:btih:{}&dn={}&tr=udp://open.demonii.com:1337/announce&tr=udp://tracker.openbittorrent.com:80".format(torrent["hash"], title)
+                  movie_json["torrents"][i]["magnet"] = "magnet:?xt=urn:btih:{}&dn={}&tr=udp://open.demonii.com:1337/announce&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce".format(torrent["hash"], title)
 
             return movie_json
         
