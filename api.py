@@ -6,6 +6,7 @@ import json
 import time
 import sys
 import re
+from io import BytesIO
 
 class Subtitle:
       def get__(imdb_code):

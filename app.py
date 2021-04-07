@@ -3,9 +3,10 @@ from flask import render_template, Blueprint, send_file, Markup
 from flask import request
 import time
 import requests
-import zipfile
+from zipfile import ZipFile
 import os
 import webvtt
+from io import BytesIO
 from pycaption import SRTReader, WebVTTWriter, CaptionConverter
 
 
@@ -48,6 +49,8 @@ def getMovie():
 def play():
     magnet = request.args.get('magnet')
     imdb_code = request.args.get("imdb_code")
+
+    print(magnet)
     
     seedr.delete_folders()
     
@@ -80,23 +83,20 @@ def play():
 @app.route("/subtitle/")
 def subtitle():
     imdb_code = request.args.get("imdb_code")
-    os.system("rm -r subtitle.zip")
-    os.system("rm -r ./static/*.srt")
     
     subtitleUrl = Subtitle.get__(imdb_code)
     if(subtitleUrl != ""):
         r = requests.get(subtitleUrl, allow_redirects=True)
-        with open("subtitle.zip", 'wb') as file:
-            file.write(r.content)
+
+        filebytes = BytesIO(r.content)
             
-        with zipfile.ZipFile("./subtitle.zip", 'r') as zip_ref:
-            zip_ref.extractall("./static/")
+        myzipfile = ZipFile(filebytes)
 
-        os.system("mv ./static/*.srt ./static/subtitle.srt")
+        print(myzipfile.namelist())
 
-        with open("./static/subtitle.srt", "r" , errors =  "replace") as subtitle:
-            content = subtitle.read()
-            return content
+        subtitle = myzipfile.open(myzipfile.namelist()[0])
+
+        return subtitle.read()
         
     return ""
 
