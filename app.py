@@ -85,6 +85,10 @@ def subtitle():
     imdb_code = request.args.get("imdb_code")
     
     subtitleUrl = Subtitle.get__(imdb_code)
+
+    print(subtitleUrl)
+    sys.stdout.flush()
+
     if(subtitleUrl != ""):
         r = requests.get(subtitleUrl, allow_redirects=True)
 
@@ -93,6 +97,7 @@ def subtitle():
         myzipfile = ZipFile(filebytes)
 
         print(myzipfile.namelist())
+        sys.stdout.flush()
 
         subtitle = myzipfile.open(myzipfile.namelist()[0])
 
