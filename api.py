@@ -9,7 +9,7 @@ import re
 
 class Subtitle:
       def get__(imdb_code):
-            response = requests.post("https://yifysubtitles.org/movie-imdb/{}".format(imdb_code))
+            response = requests.get("https://yifysubtitles.org/movie-imdb/{}".format(imdb_code))
             urls = re.findall("/subtitles/.*-english-yify-[0-9]*",response.text)
             print(imdb_code, response.text)
             if(len(urls) == 0):
