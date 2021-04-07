@@ -87,7 +87,7 @@ def subtitle():
     
     subtitleUrl = Subtitle.get__(imdb_code)
 
-    print(subtitleUrl)
+    print("Subtitle url = ", subtitleUrl)
     sys.stdout.flush()
 
     if(subtitleUrl != ""):
