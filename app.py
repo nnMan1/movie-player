@@ -8,6 +8,7 @@ import os
 import webvtt
 from io import BytesIO
 from pycaption import SRTReader, WebVTTWriter, CaptionConverter
+import sys
 
 
 from api import Seedr, YTS, Movie, Subtitle
