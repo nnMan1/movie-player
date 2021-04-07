@@ -6,12 +6,12 @@ import json
 import time
 import sys
 import re
-from io import BytesIO
 
 class Subtitle:
       def get__(imdb_code):
             response = requests.post("https://yifysubtitles.org/movie-imdb/{}".format(imdb_code))
             urls = re.findall("/subtitles/.*-english-yify-[0-9]*",response.text)
+            print(imdb_code, urls)
             if(len(urls) == 0):
                   return ""
             return re.sub("/subtitles/", "https://yifysubtitles.org/subtitle/", urls[0])+".zip"
