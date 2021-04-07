@@ -10,7 +10,7 @@ import re
 class Subtitle:
       def get__(imdb_code):
             response = requests.post("https://yifysubtitles.org/movie-imdb/{}".format(imdb_code))
-            urls = re.findall("/subtitles/.*-serbian-yify-[0-9]*",response.text)
+            urls = re.findall("/subtitles/.*-english-yify-[0-9]*",response.text)
             if(len(urls) == 0):
                   return ""
             return re.sub("/subtitles/", "https://yifysubtitles.org/subtitle/", urls[0])+".zip"
