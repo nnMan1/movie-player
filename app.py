@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 seedr = Seedr();
   
-login_resp = seedr.login("fdpttubhmqiwnrakqa@wqcefp.com", "123456789")
+login_resp = seedr.login("dosljakvelibor@gmail.com", "natasa12@")
 
 
 @app.route("/")
@@ -104,7 +104,13 @@ def subtitle():
 
         subtitle = myzipfile.open(myzipfile.namelist()[0])
 
-        return subtitle.read()
+        try:
+            return subtitle.read().decode("utf8")
+        except:
+            try:
+                return subtitle.read().decode("utf16")
+            except:
+                return subtitle.read().decode("ascii")
         
     return ""
 
