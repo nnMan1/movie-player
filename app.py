@@ -9,6 +9,7 @@ import webvtt
 from io import BytesIO
 from pycaption import SRTReader, WebVTTWriter, CaptionConverter
 import sys
+import codecs
 
 
 from api import Seedr, YTS, Movie, Subtitle
@@ -27,12 +28,6 @@ def index():
         searchQuery = ""
 
     movies = YTS.search__(searchQuery)
-    print(movies)
-
-    movie = {
-        "url": "https://de15.seedr.cc/ff_get/881668353/Pirates.Of.The.Caribbean.Dead.Men.Tell.No.Tales.2017.720p.BluRay.x264-[YTS.AG].mp4?st=bKmtfXGGaf5Vo_OMD8ycqA&e=1617305713",
-        "name": "Pirates of caribbean"
-    }
 
     return render_template("searchPage.htm", movies = movies)
 

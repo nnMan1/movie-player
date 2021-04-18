@@ -5,18 +5,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Index</title>
+  <title>Movie Player</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
 
-  <label for="search-input">Search: </label>
-  <input type="text" id="search-input">
-  <button id ="search">Search</button>
+  <div id = search-input>
+    <input  id="search-input" type="text" placeholder="Search.." name="search">
+    <button  id ="search"><i class="fa fa-search"></i></button>
+  </div>
+ 
 
-  {% for movie in movies %}
-      <p><a href="/get-movie?id={{movie.id}}">{{ movie.title }}</a></p>
-  {% endfor %}
+  <div id = movies>
+    {% for movie in movies %}
+      <a href="/get-movie?id={{movie.id}}">
+        <div class = movie-card>
+          <img src={{movie.medium_cover_image}} alt="">
+          <p>{{ movie.title }}</p>
+        </div>
+      </a>
+      
+    {% endfor %}
+  </div>
+  
 
   <script>
     var searchInput = document.querySelector("#search-input")

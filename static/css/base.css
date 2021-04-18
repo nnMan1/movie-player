@@ -1,3 +1,54 @@
-    body{
-        background-color: #000000;
-    }
+body {
+    background-color: #000000;
+    color: white
+}
+
+#search-input {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+}
+
+#search-input input {
+padding: 10px;
+font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  max-width: 300px;
+  background: #000000;
+  color: white
+}
+
+#search-input > button {
+  float: left;
+  width: 20%;
+  max-width: 100px;
+  padding: 10px;
+  background: #afafaf;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+#movies {
+    padding-top: 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.movie-card {
+    flex-shrink: 2;
+    text-align: center;
+}
+
+a .movie-card {
+    color: white;
+    text-decoration: none;
+}
+
