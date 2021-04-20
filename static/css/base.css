@@ -3,14 +3,14 @@ body {
     color: white
 }
 
-#search-input {
+#search-container {
     display: flex;
     align-content: center;
     justify-content: center;
 
 }
 
-#search-input input {
+#search-container input {
 padding: 10px;
 font-size: 17px;
   border: 1px solid grey;
@@ -21,7 +21,7 @@ font-size: 17px;
   color: white
 }
 
-#search-input > button {
+#search-container > button {
   float: left;
   width: 20%;
   max-width: 100px;
