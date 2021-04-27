@@ -28,27 +28,32 @@
 	    vtt = "WEBVTT\n\n\n" + vtt
 	    vtt = vtt.replace(/^\s+|\s+$/g, '');
 	    return vtt
-	}
+  }
+  
+  function loadSubtitle(){
 
-    document.getElementById("video").addEventListener("loadedmetadata", function() {
-        track = document.createElement("track");
-        track.kind = "captions";
-        track.label = "English";
-        track.srclang = "en";
-        track.addEventListener("load", function() {
-          this.mode = "showing";
-          video.textTracks[0].mode = "showing"; // thanks Firefox 
-        });
-        // Here I just call trim() to get WEBVTT as 6 first characters
-        var vttText = document.getElementById("source").value.trim();
-        vttText = srt2vtt(vttText)
-        document.getElementById("source").value = vttText
-        var vttBlob = new Blob([vttText], {
-          type: 'text/plain'
-        });
-        track.src = URL.createObjectURL(vttBlob);
-        this.appendChild(track);
+      var videoPlayer = document.getElementById("video")
+
+      track = document.createElement("track");
+      track.kind = "captions";
+      track.label = "English";
+      track.srclang = "en";
+      track.addEventListener("load", function() {
+        this.mode = "showing";
+        video.textTracks[0].mode = "showing"; // thanks Firefox 
       });
+      // Here I just call trim() to get WEBVTT as 6 first characters
+      var vttText = document.getElementById("source").value.trim();
+      vttText = srt2vtt(vttText)
+      document.getElementById("source").value = vttText
+      var vttBlob = new Blob([vttText], {
+        type: 'text/plain'
+      });
+      track.src = URL.createObjectURL(vttBlob);
+      videoPlayer.appendChild(track);
+  }
+
+    document.getElementById("video").addEventListener("loadedmetadata", loadSubtitle);
 </script>
 </body>
 
